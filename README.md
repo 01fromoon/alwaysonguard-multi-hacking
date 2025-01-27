@@ -14,7 +14,7 @@ Bu proje, çeşitli hacking araçlarını ve tekniklerini içeren bir Python uyg
 ## Gereksinimler
 
 - Python 3.x
-- Gerekli kütüphaneler (örneğin, `colorama`, `requests`, vb.)
+- Gerekli kütüphaneler (colorama,requests)
 
 ## Kurulum
 
