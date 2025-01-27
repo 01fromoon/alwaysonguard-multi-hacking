@@ -4,51 +4,89 @@ import requests
 import time
 from colorama import init, Fore, Style
 
+# Colorama'yı başlat
+init(autoreset=True)
 
 def run_command(command):
     try:
         subprocess.run(command, shell=True, check=True)
     except subprocess.CalledProcessError as e:
-        print(f"An error occurred while executing command: {command}\nError: {e}")
+        print(f"{Fore.RED}An error occurred while executing command: {command}\nError: {e}")
 
-def show_main_menu():
-    print("""
-    _____  .__                              ________           ________                       .___
-    /  _  \ |  |__  _  _______  ___.__. _____\_____  \   ____  /  _____/ __ _______ _______  __| _/
-    /  /_\  \|  |\ \/ \/ /\__  \<   |  |/  ___//   |   \ /    \/   \  ___|  |  \__  \\_  __ \/ __ | 
+def print_colored_ascii_art():
+    ascii_art = r"""
+       _____  .__                              ________           ________                       .___
+      /  _  \ |  |__  _  _______  ___.__. _____\_____  \   ____  /  _____/ __ _______ _______  __| _/
+     /  /_\  \|  |\ \/ \/ /\__  \<   |  |/  ___//   |   \ /    \/   \  ___|  |  \__  \\_  __ \/ __ | 
     /    |    \  |_\     /  / __ \\___  |\___ \/    |    \   |  \    \_\  \  |  // __ \|  | \/ /_/ | 
     \____|__  /____/\/\_/  (____  / ____/____  >_______  /___|  /\______  /____/(____  /__|  \____ | 
             \/                  \/\/         \/        \/     \/        \/           \/           \/ 
                                                             Multi Hacking Tool / By 01fromoon
-   """)
+    """
     
+    # Renk geçişi için ayar
+    colors = [Fore.GREEN, Fore.LIGHTGREEN_EX, Fore.WHITE]
+    
+    for line in ascii_art.splitlines():
+        for i in range(len(line)):
+            # Renk seçimi
+            color = colors[int(i / len(line) * (len(colors) - 1))]  # Soldan sağa geçiş
+            print(color + line[i], end='', flush=True)  # Her karakteri yazdır
+            time.sleep(0.001)  # Her karakter arasında bekleme
+        print()  # Satır sonu
+    print(Style.RESET_ALL)  # Varsayılan stil
 
+def print_menu_option(option_text):
+    colors = [Fore.GREEN, Fore.LIGHTGREEN_EX, Fore.WHITE]
+    for i in range(len(option_text)):
+        color = colors[int(i / len(option_text) * (len(colors) - 1))]  # Soldan sağa geçiş
+        print(color + option_text[i], end='', flush=True)  # Her karakteri yazdır
+        time.sleep(0.001)  # Her karakter arasında bekleme
+    print()  # Satır sonu
 
-    print("[1] AnonSurf")
-    print("[2] Information Gathering")
-    print("[3] SQL Injection Tools.")
-    print("[4] Wireless Attack")
-    print("[5] Password Attacks")
-    print("[6] Phishing Tool")
-    print("[7] Web Attack Tool")
-    print("[8] Post exploitation")
-    print("[9] Forensic Tools")
-    print("[10] Payload Creator")
-    print("[11] Router Exploit")
-    print("[12] Wifi Jamming")
-    print("[13] SocialMedia Attack")
-    print("[14] SocialMedia Finder")
-    print("[15] Android Hack")
-    print("[16] Port Forwarding")
-    print("[17] Other Tools")
-    print("[18] Exit")
+def show_main_menu():
+    print_colored_ascii_art()  # Renkli ASCII sanatını yazdır
+    print(Style.RESET_ALL)  # Varsayılan stil
+    
+def show_main_menu():
+    print_colored_ascii_art()  # Renkli ASCII sanatını yazdır
+    print(Style.RESET_ALL)  # Varsayılan stil
+    print(Fore.WHITE + "[1] AnonSurf")
+    print(Fore.WHITE + "[2] Information Gathering")
+    print(Fore.WHITE + "[3] SQL Injection Tools.")
+    print(Fore.WHITE + "[4] Wireless Attack")
+    print(Fore.WHITE + "[5] Password Attacks")
+    print(Fore.WHITE + "[6] Phishing Tool")
+    print(Fore.WHITE + "[7] Web Attack Tool")
+    print(Fore.WHITE + "[8] Post exploitation")
+    print(Fore.WHITE + "[9] Forensic Tools")
+    print(Fore.WHITE + "[10] Payload Creator")
+    print(Fore.WHITE + "[11] Router Exploit")
+    print(Fore.WHITE + "[12] Wifi Jamming")
+    print(Fore.WHITE + "[13] SocialMedia Attack")
+    print(Fore.WHITE + "[14] SocialMedia Finder")
+    print(Fore.WHITE + "[15] Android Hack")
+    print(Fore.WHITE + "[16] Port Forwarding")
+    print(Fore.WHITE + "[17] Other Tools")
+    print(Fore.LIGHTRED_EX + "[18] Exit")
 
 def option_1():
+    # AnonSurf başlığı
+    ascii_art = r"""
+    _                                                      __ _           
+   /_\  _ _  ___ _ _ _  _ _ __  ___ _  _ ___  ____  _ _ _ / _(_)_ _  __ _ 
+  / _ \| ' \/ _ \ ' \ || | '  \/ _ \ || (_-< (_-< || | '_|  _| | ' \/ _` |
+ /_/ \_\_||_\___/_||_\_, |_|_|_\___/\_,_/__/ /__/\_,_|_| |_| |_|_||_\__, |
+                     |__/                                           |___/ 
+    """
+    
+    print(Fore.YELLOW + ascii_art)  # ASCII sanatını sarı renkte yazdır
+    print(Style.RESET_ALL)  # Varsayılan stil
     while True:
-        print("\nAnonSurf Options:")
-        print("[1] Anonymously surf")
-        print("[2] Multitor")
-        print("[3] Back") 
+        print(Fore.GREEN + "\nAnonSurf Options:")
+        print(Fore.LIGHTMAGENTA_EX + "[1] Anonymously surf")
+        print(Fore.LIGHTMAGENTA_EX + "[2] Multitor")
+        print(Fore.LIGHTRED_EX  + "[3] Back") 
         
         choice = input("Select an option (1-3): ")
         
@@ -68,19 +106,30 @@ def option_1():
             print("Going back to the main menu.")
             break  # Ana menüye dön
         else:
-            print("Invalid option. Please try again.") 
+            print("Invalid option. Please try again.")
 
 def option_2():
+    # Information Gathering başlığı
+    ascii_art = r"""
+  ___       __                    _   _             ___      _   _            _           
+ |_ _|_ _  / _|___ _ _ _ __  __ _| |_(_)___ _ _    / __|__ _| |_| |_  ___ _ _(_)_ _  __ _ 
+  | || ' \|  _/ _ \ '_| '  \/ _` |  _| / _ \ ' \  | (_ / _` |  _| ' \/ -_) '_| | ' \/ _` |
+ |___|_||_|_| \___/_| |_|_|_\__,_|\__|_\___/_||_|  \___\__,_|\__|_||_\___|_| |_|_||_\__, |
+                                                                                    |___/ 
+    """
+    
+    print(Fore.YELLOW + ascii_art)  # ASCII sanatını sarı renkte yazdır
+    print(Style.RESET_ALL)  # Varsayılan stil
     while True:
-        print("\nInformation Gathering Options:")
-        print("[1] Nmap")
-        print("[2] Dracnmap")
-        print("[3] Port Scanning")
-        print("[4] Host To IP")
-        print("[5] Xerosploit")
-        print("[6] IsItDown (check website Down/Up)")
-        print("[7] Coming Soon..")
-        print("[8] Back to Main Menu")
+        print(Fore.GREEN + "\nInformation Gathering Options:")
+        print(Fore.BLUE  + "[1] Nmap")
+        print(Fore.CYAN  + "[2] Dracnmap")
+        print(Fore.LIGHTBLUE_EX + "[3] Port Scanning")
+        print(Fore.LIGHTCYAN_EX + "[4] Host To IP")
+        print(Fore.LIGHTGREEN_EX + "[5] Xerosploit")
+        print(Fore.LIGHTMAGENTA_EX + "[6] IsItDown (check website Down/Up)")
+        print(Fore.LIGHTMAGENTA_EX + "[7] Coming Soon..")
+        print(Fore.LIGHTRED_EX + "[8] Back to Main Menu")
         
         choice = input("Select an option (1-8): ")
         
@@ -141,12 +190,22 @@ def option_2():
             print("Invalid option. Please try again.")
 
 def option_3():
+    ascii_art = r"""
+  ___  ___  _      ___ _  _    _ ___ ___ _____ ___ ___  _  _ 
+ / __|/ _ \| |    |_ _| \| |_ | | __/ __|_   _|_ _/ _ \| \| |
+ \__ \ (_) | |__   | || .` | || | _| (__  | |  | | (_) | .` |
+ |___/\__\_\____| |___|_|\_|\__/|___\___| |_| |___\___/|_|\_|
+                                                               """
+
+    print(Fore.YELLOW + ascii_art)  # ASCII sanatını sarı renkte yazdır
+    print(Style.RESET_ALL)  # Varsayılan stil
+    # SQL Injection ile ilgili diğer işlemler burada yapılabilir
     while True:
-        print("\nSQL Injection Tools:")
-        print("[1] Leviathan")
-        print("[2] Explo")
-        print("[3] Sqlmap")
-        print("[4] Back to Main Menu")
+        print(Fore.GREEN + "\nSQL Injection Tools:")
+        print(Fore.BLUE + "[1] Leviathan")
+        print(Fore.CYAN + "[2] Explo")
+        print(Fore.LIGHTBLUE_EX + "[3] Sqlmap")
+        print(Fore.LIGHTRED_EX + "[4] Back to Main Menu")
         
         choice = input("Select an option (1-4): ")
         
@@ -170,14 +229,24 @@ def option_3():
             print("Invalid option. Please try again.")
 
 def option_4():
+    # Wireless Attack başlığı
+    ascii_art = r"""
+ __      _____ ___ ___ _    ___ ___ ___     _ _____ _____ _   ___ _  _____ 
+ \ \    / /_ _| _ \ __| |  | __/ __/ __|   /_\_   _|_   _/_\ / __| |/ / __|
+  \ \/\/ / | ||   / _|| |__| _|\__ \__ \  / _ \| |   | |/ _ \ (__| ' <\__ \
+   \_/\_/ |___|_|_\___|____|___|___/___/ /_/ \_\_|   |_/_/ \_\___|_|\_\___/
+    """
+    
+    print(Fore.YELLOW + ascii_art)  # ASCII sanatını sarı renkte yazdır
+    print(Style.RESET_ALL)  # Varsayılan stil
     while True:
-        print("\nWireless Attack Options:")
-        print("[1] Wifite")
-        print("[2] Pixiewps")
-        print("[3] Airgeddon")
-        print("[4] Ettercap")
-        print("[5] Bettercap")
-        print("[6] Exit")
+        print(Fore.GREEN + "\nWireless Attack Options:")
+        print(Fore.BLUE + "[1] Wifite")
+        print(Fore.CYAN + "[2] Pixiewps")
+        print(Fore.GREEN + "[3] Airgeddon")
+        print(Fore.LIGHTBLUE_EX + "[4] Ettercap")
+        print(Fore.LIGHTCYAN_EX + "[5] Bettercap")
+        print(Fore.LIGHTRED_EX + "[6] Exit")
         
         choice = input("Select an option (1-6): ")
         
@@ -237,16 +306,91 @@ def option_4():
             print("Invalid option. Please try again.")
 
 def option_5():
-    print("Password Attacks selected.")
+    # Password Attacks başlığı
+    ascii_art = r"""
+  ___                              _     _  _   _           _        
+ | _ \__ _ _______ __ _____ _ _ __| |   /_\| |_| |_ __ _ __| |__ ___ 
+ |  _/ _` (_-<_-< V  V / _ \ '_/ _` |  / _ \  _|  _/ _` / _| / /(_-< 
+ |_| \__,_/__/__/\_/\_/\___/_| \__,_| /_/ \_\__|\__\__,_\__|_\_\/__/ 
+                                                                     
+    """
+    
+    print(Fore.YELLOW + ascii_art)  # ASCII sanatını sarı renkte yazdır
+    print(Style.RESET_ALL)  # Varsayılan stil
+    while True:
+        print(Fore.GREEN + "\nPassword Attacks Options:")
+        print(Fore.BLUE + "[1] Hash Buster - A tool designed to help identify and crack password hashes.")
+        print(Fore.CYAN + "[2] Hashcat - A powerful password recovery tool that supports a wide range of hashing algorithms.")
+        print(Fore.LIGHTBLACK_EX + "[3] Cupp - Common User Passwords Profiler that generates password lists based on user information.")
+        print(Fore.LIGHTBLUE_EX + "[4] WordlistCreator - A utility for creating custom wordlists for password cracking.")
+        print(Fore.LIGHTCYAN_EX + "[5] Goblin WordGenerator - A tool that generates password lists using various algorithms and rules.")
+        print(Fore.LIGHTGREEN_EX + "[6] Password List (1.4 Billion Clear Text Password) - A comprehensive collection of passwords available at https://github.com/Viralmaniar/SMWYG-Show-Me-What-You-Got")
+        print(Fore.LIGHTRED_EX + "[7] Back to Main Menu")
+        
+        choice = input("Select an option (1-7): ")
+        
+        if choice == '1':
+            print("You have selected Hash Buster.")
+            run_command("git clone https://github.com/yourusername/hashbuster.git")  # Replace with actual URL
+            print("Hash Buster has been cloned successfully.")
+            run_command("cd hashbuster && chmod +x hashbuster.py")
+            print("Starting Hash Buster...")
+            run_command("python3 hashbuster.py")  # Hash Buster'ı başlat
+        elif choice == '2':
+            print("You have selected Hashcat.")
+            run_command("git clone https://github.com/hashcat/hashcat.git")
+            print("Hashcat has been cloned successfully.")
+            run_command("cd hashcat && make")
+            print("Starting Hashcat...")
+            run_command("hashcat --help")  # Hashcat yardımını göster
+        elif choice == '3':
+            print("You have selected Cupp.")
+            run_command("git clone https://github.com/Mebus/cupp.git")
+            print("Cupp has been cloned successfully.")
+            run_command("cd cupp && chmod +x cupp.py")
+            print("Starting Cupp...")
+            run_command("python3 cupp.py")  # Cupp'ı başlat
+        elif choice == '4':
+            print("You have selected WordlistCreator.")
+            run_command("git clone https://github.com/yourusername/wordlistcreator.git")  # Replace with actual URL
+            print("WordlistCreator has been cloned successfully.")
+            run_command("cd wordlistcreator && chmod +x wordlistcreator.py")
+            print("Starting WordlistCreator...")
+            run_command("python3 wordlistcreator.py")  # WordlistCreator'ı başlat
+        elif choice == '5':
+            print("You have selected Goblin WordGenerator.")
+            run_command("git clone https://github.com/yourusername/goblinwordgenerator.git")  # Replace with actual URL
+            print("Goblin WordGenerator has been cloned successfully.")
+            run_command("cd goblinwordgenerator && chmod +x goblinwordgenerator.py")
+            print("Starting Goblin WordGenerator...")
+            run_command("python3 goblinwordgenerator.py")  # Goblin WordGenerator'ı başlat
+        elif choice == '6':
+            print("You have selected Password List (1.4 Billion Clear Text Password).")
+            print("You can download the password list from: https://github.com/Viralmaniar/SMWYG-Show-Me-What-You-Got")
+        elif choice == '7':
+            print("Going back to the main menu.")
+            break  # Ana menüye dön
+        else:
+            print("Invalid option. Please try again.")
 
 def option_6():
+    ascii_art = r"""
+  ___ _    _    _    _             _____         _ 
+ | _ \ |_ (_)__| |_ (_)_ _  __ _  |_   _|__  ___| |
+ |  _/ ' \| (_-< ' \| | ' \/ _` |   | |/ _ \/ _ \ |
+ |_| |_||_|_/__/_||_|_|_||_\__, |   |_|\___/\___/_|
+                           |___/                   
+    """
+    
+    print(Fore.YELLOW + ascii_art)  # ASCII sanatını sarı renkte yazdır
+    print(Style.RESET_ALL)  # Varsayılan stil
     while True:
-        print("\nPhishing Tool Options:")
-        print("[1] Pyphisher")
-        print("[2] AdvPhishing")
-        print("[3] HiddenEye")
-        print("[4] zphisher")
-        print("[5] Back to Main Menu")
+        print(Fore.GREEN + "\nPhishing Tool Options:")
+        print(Fore.BLUE + "[1] Pyphisher")
+        print(Fore.CYAN + "[2] AdvPhishing")
+        print(Fore.LIGHTBLUE_EX + "[3] HiddenEye")
+        print(Fore.LIGHTCYAN_EX + "[4] zphisher")
+        print(Fore.LIGHTRED_EX + "[5] Back to Main Menu")
         
         choice = input("Select an option (1-5): ")
         
@@ -572,7 +716,7 @@ def option_13():
 def option_14():
     while True:
         print("\nSocial Media Finder Options:")
-        print("[1] FindUser ")
+        print("[1] FindUser  ")
         print("[2] Sherlock")
         print("[3] SocialScan")
         print("[4] Back to Main Menu")
@@ -721,63 +865,6 @@ def option_17():
         else:
             print("Invalid option. Please try again.")
 
-def option_5():
-    while True:
-        print("\nPassword Attacks Options:")
-        print("[1] Hash Buster - A tool designed to help identify and crack password hashes.")
-        print("[2] Hashcat - A powerful password recovery tool that supports a wide range of hashing algorithms.")
-        print("[3] Cupp - Common User Passwords Profiler that generates password lists based on user information.")
-        print("[4] WordlistCreator - A utility for creating custom wordlists for password cracking.")
-        print("[5] Goblin WordGenerator - A tool that generates password lists using various algorithms and rules.")
-        print("[6] Password List (1.4 Billion Clear Text Password) - A comprehensive collection of passwords available at https://github.com/Viralmaniar/SMWYG-Show-Me-What-You-Got")
-        print("[7] Back to Main Menu")
-        
-        choice = input("Select an option (1-7): ")
-        
-        if choice == '1':
-            print("You have selected Hash Buster.")
-            run_command("git clone https://github.com/yourusername/hashbuster.git")  # Replace with actual URL
-            print("Hash Buster has been cloned successfully.")
-            run_command("cd hashbuster && chmod +x hashbuster.py")
-            print("Starting Hash Buster...")
-            run_command("python3 hashbuster.py")  # Hash Buster'ı başlat
-        elif choice == '2':
-            print("You have selected Hashcat.")
-            run_command("git clone https://github.com/hashcat/hashcat.git")
-            print("Hashcat has been cloned successfully.")
-            run_command("cd hashcat && make")
-            print("Starting Hashcat...")
-            run_command("hashcat --help")  # Hashcat yardımını göster
-        elif choice == '3':
-            print("You have selected Cupp.")
-            run_command("git clone https://github.com/Mebus/cupp.git")
-            print("Cupp has been cloned successfully.")
-            run_command("cd cupp && chmod +x cupp.py")
-            print("Starting Cupp...")
-            run_command("python3 cupp.py")  # Cupp'ı başlat
-        elif choice == '4':
-            print("You have selected WordlistCreator.")
-            run_command("git clone https://github.com/yourusername/wordlistcreator.git")  # Replace with actual URL
-            print("WordlistCreator has been cloned successfully.")
-            run_command("cd wordlistcreator && chmod +x wordlistcreator.py")
-            print("Starting WordlistCreator...")
-            run_command("python3 wordlistcreator.py")  # WordlistCreator'ı başlat
-        elif choice == '5':
-            print("You have selected Goblin WordGenerator.")
-            run_command("git clone https://github.com/yourusername/goblinwordgenerator.git")  # Replace with actual URL
-            print("Goblin WordGenerator has been cloned successfully.")
-            run_command("cd goblinwordgenerator && chmod +x goblinwordgenerator.py")
-            print("Starting Goblin WordGenerator...")
-            run_command("python3 goblinwordgenerator.py")  # Goblin WordGenerator'ı başlat
-        elif choice == '6':
-            print("You have selected Password List (1.4 Billion Clear Text Password).")
-            print("You can download the password list from: https://github.com/Viralmaniar/SMWYG-Show-Me-What-You-Got")
-        elif choice == '7':
-            print("Going back to the main menu.")
-            break  # Ana menüye dön
-        else:
-            print("Invalid option. Please try again.")
-
 def main():
     show_main_menu()  # Ana menüyü göster
 
@@ -818,7 +905,7 @@ def main():
             option_11()
             show_main_menu()  # Ana menüyü tekrar göster
         elif choice == '12':
-            option_12()  # Wifi Jamming seçeneği
+            option_12()
             show_main_menu()  # Ana menüyü tekrar göster
         elif choice == '13':
             option_13()
@@ -836,10 +923,10 @@ def main():
             option_17()
             show_main_menu()  # Ana menüyü tekrar göster
         elif choice == '18':
-            print("Exiting the tool.")
+            print(Fore.RED + "Exiting the tool.")
             break
         else:
-            print("Invalid option. Please try again.")
+            print(Fore.RED + "Invalid option. Please try again.")
 
 if __name__ == "__main__":
     main()
